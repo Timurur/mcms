@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MCMS Login</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <style>
+        .logHeader {
+
+            width:100%;
+            text-align: center;
+
+        }
+        .loginForm{
+            display: inline-block;
+            text-align: left;
+
+        }
+    </style>
+</head>
+<body>
+<div class="logHeader">
+    <h1>MCMS Admin Access</h1>
+</div>
+<div style="text-align: center">
+    <div class="loginForm">
+        <h3>Please login</h3>
+        <form method="post" id="loginForm">
+
+            <input type="text" placeholder="Login" required id="login"><br>
+
+            <input type="text" style="margin-top: 10px;" placeholder="Password" required id="psw"><br>
+            <input type="submit" style="margin-left:40px;margin-top: 10px;">
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+
+    $('#loginForm').submit(function (e) {
+        e.preventDefault();
+        var login = document.getElementById("login").value;
+        var psw = document.getElementById("psw").value;
+        $.ajax({
+            url: '/login.php',
+            type: 'POST',
+            data: 'login=' + login + "&password=" + psw,
+            success: function (res) {
+                console.log(res);
+                if (res === "ok") {
+                    alert("SUPER OK");
+                    location.href = "index.php/";
+
+                }
+                else {
+                    alert("wrong login or password");
+                }
+            }
+        });
+    });
+
+
+</script>
+</body>
+</html>
