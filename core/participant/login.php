@@ -1,4 +1,5 @@
 <?php
+require_once "../mainDB.php";
 
 if (isset($_POST['login']) && isset($_POST['password'])) {
     echo(login($_POST['login'], $_POST['password']));
@@ -7,28 +8,17 @@ if (isset($_POST['login']) && isset($_POST['password'])) {
 }
 
 function login($login, $psw) {
-    $config = parse_ini_file ($_SERVER['DOCUMENT_ROOT']."/config.ini", TRUE)["main_db"];
-    $link = mysqli_connect($config["host"],$config["user"], $config["password"], $config["db_name"]);
 
-    if (mysqli_connect_errno()) {
-        return "connection error";
-    }
+    $pdo = getMainDB();
 
-    $query = 'SELECT * FROM participants WHERE login = "' . $login . '" AND password = "' . $psw . '"LIMIT 1;';
-    if ($result = mysqli_query($link, $query)) {
-        if (mysqli_num_rows($result) > 0) {
-            session_start();
-            $_SESSION['isLoggedParticipant'] = true;
-            $_SESSION['participantData'] = mysqli_fetch_array($result);
-            return "ok";
-        } else {
-            return "not found";
-        }
+    $stmt = $pdo->prepare('SELECT * FROM participants WHERE login = ? AND password = ? LIMIT 1');
+    $stmt->execute(array($login,$psw));
 
-        mysqli_free_result($result);
+    if($result = $stmt->fetch()){
+        session_start();
+        $_SESSION['participantData'] = $result;
+        return "ok";
     } else {
-        return "db error";
+        return "not found";
     }
-
-    mysqli_close($link);
 }
