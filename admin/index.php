@@ -1,7 +1,7 @@
 <?php
 session_start();
-if ($_SESSION['isLoggedAdmin'] == false) {
-    header("Location:/admin/login.html");
-} else {
+if (isset($_SESSION['adminData'])) {
     header("Location:/admin/dashboard.php");
+} else {
+    header("Location:/admin/login.html");
 }
