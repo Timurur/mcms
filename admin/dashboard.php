@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,10 +5,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <style>
         .Header {
-
             width:100%;
             text-align: center;
-
         }
 
     </style>
@@ -25,16 +22,3 @@
 </div>
 
 </body>
-
-
-=======
-<?php
-session_start();
-$userData = $_SESSION["adminData"];
-?>
-
-User id: <?= $userData["id"] ?> <br>
-User name: <?= $userData["name"] ?> <br>
-User email: <?= $userData["email"] ?> <br>
-User phone: <?= $userData["phone"] ?> <br>
->>>>>>> refs/remotes/origin/olympiad-creation

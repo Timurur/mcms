@@ -238,6 +238,4 @@ $('#olympiadForm').submit(function (e) {
 
         }
     });
-
-
 });
