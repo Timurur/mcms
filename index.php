@@ -1,9 +1,7 @@
-<?
+<?php
 session_start();
-//print_r($_SESSION);
-if($_SESSION['isLogged']==false){
+if ($_SESSION['isLoggedParticipant'] == false) {
     header("Location:/login.html");
+} else {
+    header("Location:/dashboard.php");
 }
-else{header("Location:/dashboard.php");}
-//!isset($_SESSION['isLogged'])||
-?>
